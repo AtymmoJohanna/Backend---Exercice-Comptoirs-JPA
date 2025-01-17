@@ -90,6 +90,13 @@ public class ConsoleApp implements CommandLineRunner {
         );
 
         tapezEnterPourContinuer();
+        log.info("Prix d'une commande");
+        List<CoutCommande> resultPrix = commandeDAO.coutCommande(10702);
+        resultPrix.forEach( // Une autre syntaxe pour itérer sur une liste !
+                ligne -> log.info("Le prix de la commande numero {}, est {} ", ligne.getNumeroCommande(), ligne.getcoutCommande())
+        );
+
+        tapezEnterPourContinuer();
         log.info("Prix par commande d'un client");
         List<coutCommandesParClient> result = commandeDAO.coutParCommande("ALFKI");
         result.forEach( // Une autre syntaxe pour itérer sur une liste !
