@@ -88,6 +88,13 @@ public class ConsoleApp implements CommandLineRunner {
         clientDAO.produitsParClient().forEach(
             ppc -> log.info("Le client {} a commandé {} produits différents", ppc.getSociete(), ppc.getNombre())
         );
+
+        tapezEnterPourContinuer();
+        log.info("Prix par commande d'un client");
+        List<coutCommandesParClient> result = commandeDAO.coutParCommande("ALFKI");
+        result.forEach( // Une autre syntaxe pour itérer sur une liste !
+                ligne -> log.info("Pour la commande numero{}, de port{} le client de code alfki a doit {} ", ligne.getNumero(), ligne.getPort(), ligne.getMontant())
+        );
     }
 
     public static void tapezEnterPourContinuer() throws IOException  {

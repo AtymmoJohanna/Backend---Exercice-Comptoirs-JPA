@@ -9,4 +9,19 @@ import java.util.List;
 
 public interface CommandeRepository extends JpaRepository<Commande, Integer> {
 
+
+
+    @Query( value = """
+            SELECT numero, port, SUM(quantite*prix_unitaire*(1- remise)) AS montant FROM ligne
+            INNER JOIN produit ON Produit_Reference = Reference
+            INNER JOIN commande ON commande_numero = numero
+            WHERE client_code = :codeClient
+            GROUP BY numero, port
+    """,
+            nativeQuery = true )
+    List<coutCommandesParClient> coutParCommande(String codeClient);
+
+
+
+
 }
